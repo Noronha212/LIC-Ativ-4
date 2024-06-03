@@ -20,7 +20,7 @@ int j;
 int menu = 0;
 int quarto = 1;
 
-// Estrutura Dados Hóspede - Endereço
+// Estrutura Dados Hospede - Endereco
 struct stendereco
 {
     char rua[100];
@@ -30,20 +30,20 @@ struct stendereco
     char uf[2];            
 };
 
-// Estrutura Dados Hóspede
+// Estrutura Dados Hospede
 struct stquarto
 {
     char status;
     char nome[50];
     char cpf[11];
     char telefone[11];
-    struct stendereco ender;    // Estrutura Dados Hóspede - Endereço Aninhada
+    struct stendereco ender;    // Estrutura Dados Hospede - Endereco Aninhada
 };
 
-// FUNÇÃO PRINCIPAL
+// FUNCAO PRINCIPAL
 int main (){
     fCriaMat(m, status);
-    while (1){ // Loop contínuo até o usuário optar por sair
+    while (1){ // Loop continuo ate o usuario optar por sair
         if (fMenu() == 5) {
             printf("Saindo do sistema.\n");
             break; // Sai do loop e termina o programa
@@ -54,14 +54,14 @@ int main (){
 
 // CRIAR E PREENCHER MATRIZ 
 void fCriaMat(int m[20][14], char status[20][14]) {
-    // Variável para preencher a matriz
+    // Variavel para preencher a matriz
     int count = 1;
 
     // Preenchendo a matriz com quartos de 1 a 280 e status '.' (livre)
     for (int i = 0; i < 20; i++) {
         for (int j = 0; j < 14; j++) {
             m[i][j] = count++;
-            status[i][j] = '.'; // Todos os quartos começam como livres
+            status[i][j] = '.'; // Todos os quartos comecam como livres
         }
     }
 }
@@ -78,14 +78,14 @@ void fMostraMat(int m[20][14], char status[20][14]) {
     printf("\n---------------------------------------------------------------------\n");
 }
 
-// FUNÇÃO MENU
+// FUNCAO MENU
 int fMenu() {
-    printf("\nBEM VINDO AO MENU DO HOTEL\n");
+    printf("\nBEM VINDO AO MENU PRINCIPAL DO HOTEL\n");
     printf("1 - Mostrar Mapa; 2 - Check-in; 3 - Check-out; 4 - Reserva; 5 - Sair\n");
 
     if (scanf("%d", &menu) != 1) {
         clearInputBuffer();
-        printf("Entrada inválida! Por favor, insira um número.\n");
+        printf("Entrada invalida! Por favor, insira um numero.\n");
         return 0; // Retorna ao menu inicial
     }
 
@@ -101,12 +101,12 @@ int fMenu() {
             fCheckOut(m, status);
             break;
         case 4:
-            printf("Opção de reserva ainda não implementada.\n");
+            printf("Opcao de reserva ainda nao implementada.\n");
             break;
         case 5:
             return 5; // Indica que o programa deve terminar
         default:
-            printf("Opção inválida! Por favor, tente novamente.\n");
+            printf("Opcao invalida! Por favor, tente novamente.\n");
     }
 
     return 0; // Continua no menu
@@ -115,24 +115,28 @@ int fMenu() {
 // SUBMENU CHECK-IN
 void fCheckIn(int m[20][14], char status[20][14]) {
     int subMenu;
-    printf("\nCHECK-IN\n");
-    printf("1 - Realizar Check-in; 2 - Mostrar Quartos Livres\n");
+    while (1) {
+        printf("\nSUB MENU CHECK-IN\n");
+        printf("1 - Realizar Check-in; 2 - Mostrar Quartos Livres; 3 - Voltar ao Menu Anterior\n");
 
-    if (scanf("%d", &subMenu) != 1) {
-        clearInputBuffer();
-        printf("Entrada inválida! Por favor, insira um número.\n");
-        return;
-    }
+        if (scanf("%d", &subMenu) != 1) {
+            clearInputBuffer();
+            printf("Entrada invalida! Por favor, insira um numero.\n");
+            continue;
+        }
 
-    switch (subMenu) {
-        case 1:
-            fRealizarCheckIn(m, status);
-            break;
-        case 2:
-            fMostrarQuartosLivres(m, status);
-            break;
-        default:
-            printf("Opção inválida! Retornando ao menu principal.\n");
+        switch (subMenu) {
+            case 1:
+                fRealizarCheckIn(m, status);
+                break;
+            case 2:
+                fMostrarQuartosLivres(m, status);
+                break;
+            case 3:
+                return; // Retorna ao menu principal
+            default:
+                printf("Opcao invalida! Por favor, tente novamente.\n");
+        }
     }
 }
 
@@ -143,13 +147,13 @@ void fRealizarCheckIn(int m[20][14], char status[20][14]) {
 
     if (scanf("%d", &numeroQuarto) != 1) {
         clearInputBuffer();
-        printf("Entrada inválida! Por favor, insira um número.\n");
+        printf("Entrada invalida! Por favor, insira um número.\n");
         return;
     }
 
     // Validar se o número do quarto é válido
     if (numeroQuarto < 1 || numeroQuarto > 280) {
-        printf("Número do quarto inválido! Por favor, tente novamente.\n");
+        printf("Numero do quarto invalido! Por favor, tente novamente.\n");
         return;
     }
 
@@ -160,13 +164,13 @@ void fRealizarCheckIn(int m[20][14], char status[20][14]) {
                     status[i][j] = 'O';  // Ocupado
                     printf("Check-in realizado com sucesso no quarto %d.\n", numeroQuarto);
                 } else {
-                    printf("O quarto %d já está ocupado.\n", numeroQuarto);
+                    printf("O quarto %d ja esta ocupado.\n", numeroQuarto);
                 }
                 return;
             }
         }
     }
-    printf("Quarto %d não encontrado.\n", numeroQuarto);
+    printf("Quarto %d nao encontrado.\n", numeroQuarto);
 }
 
 // MOSTRAR QUARTOS LIVRES
@@ -186,41 +190,45 @@ void fMostrarQuartosLivres(int m[20][14], char status[20][14]) {
 // SUBMENU CHECK-OUT
 void fCheckOut(int m[20][14], char status[20][14]) {
     int subMenu;
-    printf("\nCHECK-OUT\n");
-    printf("1 - Realizar Check-out; 2 - Mostrar Quartos Ocupados\n");
+    while (1) {
+        printf("\nSUB MENU CHECK-OUT\n");
+        printf("1 - Realizar Check-out; 2 - Mostrar Quartos Ocupados; 3 - Voltar ao Menu Anterior\n");
 
-    if (scanf("%d", &subMenu) != 1) {
-        clearInputBuffer();
-        printf("Entrada inválida! Por favor, insira um número.\n");
-        return;
-    }
+        if (scanf("%d", &subMenu) != 1) {
+            clearInputBuffer();
+            printf("Entrada invalida! Por favor, insira um numero.\n");
+            continue;
+        }
 
-    switch (subMenu) {
-        case 1:
-            fRealizarCheckOut(m, status);
-            break;
-        case 2:
-            fMostrarQuartosOcupados(m, status);
-            break;
-        default:
-            printf("Opção inválida! Retornando ao menu principal.\n");
+        switch (subMenu) {
+            case 1:
+                fRealizarCheckOut(m, status);
+                break;
+            case 2:
+                fMostrarQuartosOcupados(m, status);
+                break;
+            case 3:
+                return; // Retorna ao menu principal
+            default:
+                printf("Opcao invalida! Por favor, tente novamente.\n");
+        }
     }
 }
 
 // REALIZAR CHECK-OUT
 void fRealizarCheckOut(int m[20][14], char status[20][14]) {
     int numeroQuarto;
-    printf("\nDigite o número do quarto para check-out: ");
+    printf("\nDigite o numero do quarto para check-out: ");
 
     if (scanf("%d", &numeroQuarto) != 1) {
         clearInputBuffer();
-        printf("Entrada inválida! Por favor, insira um número.\n");
+        printf("Entrada invalida! Por favor, insira um numero.\n");
         return;
     }
 
     // Validar se o número do quarto é válido
     if (numeroQuarto < 1 || numeroQuarto > 280) {
-        printf("Número do quarto inválido! Por favor, tente novamente.\n");
+        printf("Numero do quarto inválido! Por favor, tente novamente.\n");
         return;
     }
 
@@ -231,13 +239,13 @@ void fRealizarCheckOut(int m[20][14], char status[20][14]) {
                     status[i][j] = '.';  // Livre
                     printf("Check-out realizado com sucesso no quarto %d.\n", numeroQuarto);
                 } else {
-                    printf("O quarto %d já está livre.\n", numeroQuarto);
+                    printf("O quarto %d ja esta livre.\n", numeroQuarto);
                 }
                 return;
             }
         }
     }
-    printf("Quarto %d não encontrado.\n", numeroQuarto);
+    printf("Quarto %d nao encontrado.\n", numeroQuarto);
 }
 
 // MOSTRAR QUARTOS OCUPADOS
@@ -254,7 +262,7 @@ void fMostrarQuartosOcupados(int m[20][14], char status[20][14]) {
     printf("\n---------------------------------------------------------------------\n");
 }
 
-// Função para limpar o buffer de entrada
+// Funcao para limpar o buffer de entrada
 void clearInputBuffer() {
     int c;
     while ((c = getchar()) != '\n' && c != EOF) {}
