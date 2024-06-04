@@ -10,6 +10,8 @@ void fCheckOut(int m[20][14], char status[20][14]);
 void fMostrarQuartosLivres(int m[20][14], char status[20][14]);
 void fMostrarQuartosOcupados(int m[20][14], char status[20][14]);
 void clearInputBuffer();
+void fRealizarCheckIn(int m[20][14], char status[20][14]);
+void fRealizarCheckOut(int m[20][14], char status[20][14]);
 
 // Declaração Variáveis Globais
 int n = 1;
@@ -66,17 +68,21 @@ void fCriaMat(int m[20][14], char status[20][14]) {
     }
 }
 
-// IMPRIMIR MATRIZ (MAPA)   
-void fMostraMat(int m[20][14], char status[20][14]) {      
-    for (i = 0; i < 20; i++) {
+void fMostraMat(int m[20][14], char status[20][14]) {
+	printf("Apartamentos: ");
+	for (int k = 0; k < 14; k++) {
+        printf("\t%d", k + 1);}  // Imprimindo o apartamento correspondente
+    printf("\n");
+	for (int i = 0; i < 20; i++) {
         printf("Andar %2d: ", 20 - i);  // Imprimindo o andar correspondente
-        for (j = 0; j < 14; j++) {
-            printf(" %3d - %c  ", m[19 - i][j], status[19 - i][j]);
+        for (int j = 0; j < 14; j++) {
+            printf("\t%c", status[19 - i][j]);
         }
         printf("\n");
     }
     printf("\n---------------------------------------------------------------------\n");
 }
+
 
 // FUNCAO MENU
 int fMenu() {
@@ -143,11 +149,11 @@ void fCheckIn(int m[20][14], char status[20][14]) {
 // REALIZAR CHECK-IN
 void fRealizarCheckIn(int m[20][14], char status[20][14]) {
     int numeroQuarto;
-    printf("\nDigite o número do quarto para check-in: ");
+    printf("\nDigite o numero do quarto para check-in: ");
 
     if (scanf("%d", &numeroQuarto) != 1) {
         clearInputBuffer();
-        printf("Entrada invalida! Por favor, insira um número.\n");
+        printf("Entrada invalida! Por favor, insira um numero.\n");
         return;
     }
 
@@ -228,7 +234,7 @@ void fRealizarCheckOut(int m[20][14], char status[20][14]) {
 
     // Validar se o número do quarto é válido
     if (numeroQuarto < 1 || numeroQuarto > 280) {
-        printf("Numero do quarto inválido! Por favor, tente novamente.\n");
+        printf("Numero do quarto invalido! Por favor, tente novamente.\n");
         return;
     }
 
