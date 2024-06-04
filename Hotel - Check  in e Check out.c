@@ -68,10 +68,10 @@ void fCriaMat(int m[20][14], char status[20][14]) {
 
 // IMPRIMIR MATRIZ (MAPA)   
 void fMostraMat(int m[20][14], char status[20][14]) {      
-    for (i = 19; i >= 0; i--) {
+    for (i = 0; i < 20; i++) {
         printf("Andar %2d: ", 20 - i);  // Imprimindo o andar correspondente
         for (j = 0; j < 14; j++) {
-            printf(" %3d - %c  ", m[i][j], status[i][j]);
+            printf(" %3d - %c  ", m[19 - i][j], status[19 - i][j]);
         }
         printf("\n");
     }
