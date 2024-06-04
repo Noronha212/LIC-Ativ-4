@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciamento de Hotel</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+        }
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
+        input[type="number"] {
+            padding: 10px;
+            width: 100px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Gerenciamento de Hotel</h1>
+        <button class="btn" onclick="mostrarMapa()">Mostrar Mapa</button>
+        <button class="btn" onclick="checkIn()">Check-in</button>
+        <button class="btn" onclick="checkOut()">Check-out</button>
+        <button class="btn" onclick="reservar()">Reservar</button>
+
+        <div id="checkInForm" style="display: none;">
+            <input type="number" id="numeroQuarto" placeholder="Número do quarto">
+            <button class="btn" onclick="realizarCheckIn()">Realizar Check-in</button>
+        </div>
+
+        <div id="checkOutForm" style="display: none;">
+            <input type="number" id="numeroQuartoCheckOut" placeholder="Número do quarto">
+            <button class="btn" onclick="realizarCheckOut()">Realizar Check-out</button>
+        </div>
+
+        <div id="mapa" style="display: none;">
+            <!-- Aqui você pode exibir o mapa do hotel -->
+        </div>
+    </div>
+
+    <script>
+        function mostrarMapa() {
+            document.getElementById("mapa").style.display = "block";
+        }
+
+        function checkIn() {
+            document.getElementById("checkInForm").style.display = "block";
+        }
+
+        function realizarCheckIn() {
+            var numeroQuarto = document.getElementById("numeroQuarto").value;
+            // Enviar requisição para o servidor realizar o check-in com o número do quarto
+            alert("Realizando check-in no quarto " + numeroQuarto);
+        }
+
+        function checkOut() {
+            document.getElementById("checkOutForm").style.display = "block";
+        }
+
+        function realizarCheckOut() {
+            var numeroQuarto = document.getElementById("numeroQuartoCheckOut").value;
+            // Enviar requisição para o servidor realizar o check-out com o número do quarto
+            alert("Realizando check-out no quarto " + numeroQuarto);
+        }
+
+        function reservar() {
+            // Lógica para reservar um quarto
+            alert("Opção de reserva ainda não implementada.");
+        }
+    </script>
+</body>
+</html>
