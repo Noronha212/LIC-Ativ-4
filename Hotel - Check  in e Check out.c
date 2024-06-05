@@ -193,8 +193,6 @@ void fRealizarCheckIn(int m[20][14], char status[20][14]) {
     printf("Quarto %d nao encontrado.\n", numeroQuarto);
 }
 
-
-
 // MOSTRAR QUARTOS LIVRES
 void fMostrarQuartosLivres(int m[20][14], char status[20][14]) {
     printf("\nQUARTOS LIVRES:\n");
@@ -241,7 +239,7 @@ void fCheckOut(int m[20][14], char status[20][14]) {
 void fRealizarCheckOut(int m[20][14], char status[20][14]) {
     int andarQuarto;
     int numeroQuarto;
-    printf("\nDigite o numero do quarto para check-out: ");
+    printf("\nDigite o numero do andar para check-out: ");
 
     if (scanf("%d", &andarQuarto) != 1) {
         clearInputBuffer();
@@ -249,26 +247,39 @@ void fRealizarCheckOut(int m[20][14], char status[20][14]) {
         return;
     }
 
-    // Validar se o número do quarto é válido
-    if (andarQuarto < 1 || andarQuarto > 280) {
-        printf("Numero do quarto invalido! Por favor, tente novamente.\n");
+    // Validar se o número do andar é válido
+    if (andarQuarto < 1 || andarQuarto > 20) {
+        printf("Numero do andar invalido! Por favor, tente novamente.\n");
         return;
     }
 
-    for (i = 0; i < 20; i++) {
-        for (j = 0; j < 14; j++) {
-            if (m[i][j] == andarQuarto) {
-                if (status[i][j] == 'O') {
-                    status[i][j] = '.';  // Livre
-                    printf("Check-out realizado com sucesso no quarto %d.\n", numeroQuarto);
-                } else {
-                    printf("O quarto %d ja esta livre.\n", numeroQuarto);
-                }
-                return;
-            }
-        }
-    }
-    printf("Quarto %d nao encontrado.\n", numeroQuarto);
+	printf("\nDigite o numero do quarto para check-out: ");
+	    if (scanf("%d", &numeroQuarto) != 1) {
+	        clearInputBuffer();
+	        printf("Entrada invalida! Por favor, insira um numero.\n");
+	        return;
+	    }
+	    
+	// Validar se o número do quarto é válido
+	if (numeroQuarto < 1 || numeroQuarto > 14) {
+	    printf("Numero do quarto invalido! Por favor, tente novamente.\n");
+	    return;
+	    }
+	
+	    for (int i = 0; i < 20; i++) {
+	        for (int j = 0; j < 14; j++) {
+	            if (i == (andarQuarto-1) && j == (numeroQuarto-1)) {
+	                if (status[i][j] == 'O') {	// Ocupado
+	                    status[i][j] = '.';  	// Vago
+	                    printf("Check-out realizado com sucesso no quarto %d%d.\n", andarQuarto, numeroQuarto);
+	                } else {
+	                    printf("O quarto %d ja esta livre.\n", numeroQuarto);
+	                }
+	                return;
+	            }
+	        }
+	    }
+	    printf("Quarto %d nao encontrado.\n", numeroQuarto);
 }
 
 // MOSTRAR QUARTOS OCUPADOS
